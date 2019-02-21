@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.GoodsDao">
+
+
+    <resultMap type="com.entity.CoffeeGoods" id="GoodsList">
+
+        <id column="goods_id" property="goodsId"></id>
+        <result column="goods_name" property="goodsName"></result>
+        <result column="goods_name_en" property="goodsNameEn"></result>
+        <result column="goods_category" property="goodsCategory"></result>
+        <result column="goods_img" property="goodsImg"></result>
+        <result column="goods_price" property="goodsPrice"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="updated_time" property="updateTime"></result>
+        <result column="deleted_flag" property="deletedFlag"></result>
+    </resultMap>
+
+    <select id="findGoodsList"  parameterType="java.lang.Integer" resultMap="GoodsList">
+        select *
+        from   COFFEE_GOODS
+        where "goods_category"= #{goodsCategory} AND "deleted_flag" =0 ORDER BY "updated_time" DESC
+    </select>
+
+</mapper>

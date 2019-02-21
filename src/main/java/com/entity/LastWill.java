@@ -10,7 +10,7 @@ public class LastWill {
 	private String sign;
 	private String upMode;
 	private Date lastUpdateDate;
-	
+
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -66,6 +66,6 @@ public class LastWill {
 		return "LastWill [memberNo=" + memberNo + ", title=" + title + ", willBody=" + willBody + ", sign=" + sign
 				+ ", upMode=" + upMode + ", lastUpdateDate=" + lastUpdateDate + "]";
 	}
-	
-	
+
+
 }
