@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface GoodsService {
 
-//    查询商品列表
+    /**
+     * 查询商品列表
+     * @param type
+     * @return
+     */
     ServerResponse<List<CoffeeGoods>> findGoodsList(int type);
 }

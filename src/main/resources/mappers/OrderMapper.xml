@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OrderDao">
+
+
+    <resultMap type="com.entity.CoffeeOrder" id="OrderList">
+
+        <id column="order_id" property="orderId"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="order_no" property="orderNo"></result>
+        <result column="finish_flag" property="finishFlag"></result>
+        <result column="order_number" property="orderNumber"></result>
+        <result column="total_price" property="totalPrice"></result>
+        <result column="order_address" property="orderAddress"></result>
+        <result column="goods_id" property="goodsId"></result>
+        <result column="goods_size" property="goodsSize"></result>
+        <result column="goods_sugar" property="goodsSugar"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="updated_time" property="updatedTime"></result>
+        <result column="deleted_flag" property="deletedFlag"></result>
+    </resultMap>
+
+    <select id="selectList" parameterType="java.lang.Integer" resultMap="OrderList">
+        select *
+        from   COFFEE_ORDER
+        where "user_id"= #{userId}
+        <if test="finishFlag != 3">
+            AND "finish_flag" = #{finishFlag}
+        </if>
+          AND "deleted_flag" =0 ORDER BY "updated_time" DESC
+    </select>
+
+</mapper>

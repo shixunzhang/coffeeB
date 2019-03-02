@@ -3,7 +3,6 @@ package com.service.impl;
 import com.common.ServerResponse;
 import com.dao.GoodsDao;
 import com.entity.CoffeeGoods;
-import com.entity.LastWill;
 import com.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

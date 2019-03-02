@@ -23,6 +23,14 @@
              <!-- 表示开发的时候引入，发布的时候不会加载此包 -->  
             <scope>test</scope>
         </dependency>
+
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+        </dependency>
+
         
          <!-- spring核心包 -->  
         <dependency>  
