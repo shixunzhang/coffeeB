@@ -13,7 +13,7 @@ public class CoffeeUser {
     private String userAddress;
     private String userPortrait;
     private Date createdTime;
-    private Date updateTime;
+    private Date updatedTime;
     private int deletedFlag;
     private String userNick;
     private String userPassword;

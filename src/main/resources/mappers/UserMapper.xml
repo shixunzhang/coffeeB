@@ -10,4 +10,29 @@
    		 USER_ID=#{userId}
  	</select>
 
+	<resultMap type="com.entity.CoffeeUser" id="findByIgMap">
+		<id column="user_id" property="userId"></id>
+		<result column="user_name" property="userName"></result>
+		<result column="user_sex" property="userSex"></result>
+		<result column="user_phone" property="userPhone"></result>
+		<result column="user_address" property="userAddress"></result>
+		<result column="user_portrait" property="userPortrait"></result>
+		<result column="user_nick" property="userNick"></result>
+		<result column="user_password" property="userPassword"></result>
+		<result column="created_time" property="createdTime"></result>
+		<result column="updated_time" property="updatedTime"></result>
+		<result column="deleted_flag" property="deletedFlag"></result>
+	</resultMap>
+
+
+
+	<select id="findUserById"  parameterType="java.lang.Integer" resultMap="findByIgMap">
+		SELECT
+			*
+		FROM
+			COFFEE_USER
+		WHERE
+			"user_id"=#{userId}
+	</select>
+
 </mapper>

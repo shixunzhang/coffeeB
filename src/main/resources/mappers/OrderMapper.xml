@@ -13,6 +13,7 @@
         <result column="total_price" property="totalPrice"></result>
         <result column="order_address" property="orderAddress"></result>
         <result column="goods_id" property="goodsId"></result>
+        <result column="good_name" property="goodName"></result>
         <result column="goods_size" property="goodsSize"></result>
         <result column="goods_sugar" property="goodsSugar"></result>
         <result column="created_time" property="createdTime"></result>

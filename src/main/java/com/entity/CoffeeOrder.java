@@ -14,11 +14,12 @@ public class CoffeeOrder {
     private int deletedFlag;
     private int finishFlag;
     private int orderNumber;
-    private int totalPrice;
+    private double totalPrice;
     private String orderAddress;
     private int goodsId;
     private int goodsSize;
     private int goodsSugar;
     private String orderNo;
+    private String goodName;
 
 }

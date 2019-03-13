@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ShoppingDao">
+
+
+    <resultMap type="com.entity.CoffeeShopping" id="ShoppingList">
+        <id column="shopping_id" property="shoppingId"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="good_id" property="goodsId"></result>
+        <result column="good_name" property="goodName"></result>
+        <result column="shopping_number" property="shoppingNumber"></result>
+        <result column="total_price" property="totalPrice"></result>
+        <result column="good_size" property="goodSize"></result>
+        <result column="good_sugar" property="goodSugar"></result>
+        <result column="good_price" property="goodPrice"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="updated_time" property="updatedTime"></result>
+        <result column="deleted_flag" property="deletedFlag"></result>
+    </resultMap>
+
+    <select id="selectList" parameterType="java.lang.Integer" resultMap="ShoppingList">
+        select *
+        from   COFFEE_SHOPPING
+        where "user_id"= #{userId}
+        AND "deleted_flag" =0 ORDER BY "updated_time" DESC
+    </select>
+
+    <insert id="insertInt" parameterType="com.entity.CoffeeShopping">
+        insert into COFFEE_SHOPPING(
+                "user_id",
+                "good_id",
+                "good_name",
+                "shopping_number",
+                "total_price",
+                "good_size",
+                "good_price",
+                "good_sugar"
+                )
+        values (
+                #{userId},
+                #{goodsId},
+                #{goodName},
+                #{shoppingNumber},
+                #{totalPrice},
+                #{goodSize},
+                #{goodPrice},
+                #{goodSugar}
+                )
+    </insert>
+
+
+    <update id="updateShopping" parameterType="com.entity.CoffeeShopping">
+        update COFFEE_SHOPPING
+        <set>
+            "total_price"=#{totalPrice},
+            "shopping_number"=#{shoppingNumber},
+            "updated_time" = sysdate
+        </set>
+        <where>
+            "shopping_id"=#{shoppingId}
+        </where>
+    </update>
+
+    <update id="deleteShopping" parameterType="com.entity.CoffeeShopping">
+        update COFFEE_SHOPPING
+        <set>
+            "deleted_flag"=1,
+            "updated_time" = sysdate
+        </set>
+        <where>
+            "shopping_id"=#{shoppingId}
+        </where>
+    </update>
+
+
+
+</mapper>

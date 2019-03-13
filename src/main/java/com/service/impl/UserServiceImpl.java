@@ -2,6 +2,7 @@ package com.service.impl;
 
 import com.common.ServerResponse;
 import com.dao.UserDao;
+import com.entity.CoffeeUser;
 import com.entity.User;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,22 @@ public class UserServiceImpl implements UserService {
         if (user != null && user.getPassWord().equals(password)) {
             return ServerResponse.createBySuccess(user);
         }
-
         return ServerResponse.createByErrorMessage("查询失败");
 	}
+
+
+	@Override
+	public ServerResponse<CoffeeUser> findUserById(int userId) {
+		CoffeeUser coffeeUser = userDao.findUserById(userId);
+
+		if(coffeeUser==null){
+			return ServerResponse.createByErrorMessage("用户不存在");
+		}
+		else{
+			return ServerResponse.createBySuccess(coffeeUser);
+		}
+
+	}
+
 
 }

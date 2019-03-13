@@ -12,9 +12,9 @@ public class CoffeeGoods {
     private String goodsNameEn;
     private  int goodsCategory;
     private String goodsImg;
-    private int goodsPriceSmall;
-    private int goodsPriceBetween;
-    private int goodsPriceBig;
+    private double goodsPriceSmall;
+    private double goodsPriceBetween;
+    private double goodsPriceBig;
     private Date createdTime;
     private Date updateTime;
     private int deletedFlag;
