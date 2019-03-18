@@ -11,6 +11,7 @@ public class CoffeeShopping {
     private int goodsId;
     private int shoppingNumber;
     private double totalPrice;
+    private  int goodCategory;
     private int goodSize;
     private int goodSugar;
     private Date createdTime;

@@ -2,7 +2,6 @@ package com.entity;
 
 import lombok.Data;
 
-import java.security.PrivateKey;
 import java.util.Date;
 
 @Data

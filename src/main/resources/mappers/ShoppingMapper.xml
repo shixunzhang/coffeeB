@@ -8,6 +8,7 @@
         <result column="user_id" property="userId"></result>
         <result column="good_id" property="goodsId"></result>
         <result column="good_name" property="goodName"></result>
+        <result column="good_category" property="goodCategory"></result>
         <result column="shopping_number" property="shoppingNumber"></result>
         <result column="total_price" property="totalPrice"></result>
         <result column="good_size" property="goodSize"></result>
@@ -32,6 +33,7 @@
                 "good_name",
                 "shopping_number",
                 "total_price",
+                "good_category",
                 "good_size",
                 "good_price",
                 "good_sugar"
@@ -42,6 +44,7 @@
                 #{goodName},
                 #{shoppingNumber},
                 #{totalPrice},
+                #{goodCategory},
                 #{goodSize},
                 #{goodPrice},
                 #{goodSugar}
