@@ -19,4 +19,11 @@ public interface UserService {
 	 * @return
 	 */
     ServerResponse<CoffeeUser> findUserById(int userId);
+
+	/**
+	 * 更换头像
+	 * @param coffeeUser
+	 * @return
+	 */
+	int changeAvatar(CoffeeUser coffeeUser);
 }

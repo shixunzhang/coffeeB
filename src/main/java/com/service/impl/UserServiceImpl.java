@@ -25,7 +25,11 @@ public class UserServiceImpl implements UserService {
         return ServerResponse.createByErrorMessage("查询失败");
 	}
 
-
+	/**
+	 * 查询详细信息
+	 * @param userId
+	 * @return
+	 */
 	@Override
 	public ServerResponse<CoffeeUser> findUserById(int userId) {
 		CoffeeUser coffeeUser = userDao.findUserById(userId);
@@ -37,6 +41,19 @@ public class UserServiceImpl implements UserService {
 			return ServerResponse.createBySuccess(coffeeUser);
 		}
 
+	}
+
+
+	/**
+	 * 更换头像
+	 * @param coffeeUser
+	 * @return
+	 */
+	@Override
+	public int changeAvatar(CoffeeUser coffeeUser) {
+		int result =userDao.changeAvatar(coffeeUser);
+
+		return result;
 	}
 
 

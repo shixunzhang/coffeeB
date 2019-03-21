@@ -31,7 +31,11 @@ public class UserController {
 		}			
 	}
 
-
+	/**
+	 * 查询用户详细信息
+	 * @param coffeeUser
+	 * @return
+	 */
 	@RequestMapping(value = "/detail.do",method = RequestMethod.POST)
 	public ServerResponse<CoffeeUser> detail(@RequestBody CoffeeUser coffeeUser) {
 
@@ -45,5 +49,21 @@ public class UserController {
 		}
 	}
 
+
+	/**
+	 * 更改用户头像
+	 * @param coffeeUser
+	 * @return
+	 */
+	@RequestMapping(value = "/change-avatar.do",method = RequestMethod.POST)
+	public ServerResponse<Integer> changeAvatar(@RequestBody CoffeeUser coffeeUser) {
+		int result = userService.changeAvatar(coffeeUser);
+		if(result==1){
+			return ServerResponse.createBySuccessMessage("更换头像成功");
+		}
+		else{
+			return ServerResponse.createByErrorMessage("更换头像失败");
+		}
+	}
 
 }

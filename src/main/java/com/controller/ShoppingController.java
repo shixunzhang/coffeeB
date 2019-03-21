@@ -56,7 +56,7 @@ public class ShoppingController {
      * @return
      */
     @RequestMapping(value = "/updateShopping.do",method = RequestMethod.POST)
-    public ServerResponse<Integer>updateShopping(@RequestBody CoffeeShopping coffeeShopping){
+    public ServerResponse<Integer> updateShopping(@RequestBody CoffeeShopping coffeeShopping){
         int result = 0;
         if(coffeeShopping.getShoppingNumber()==0){
             result = shoppingService.deleteShopping(coffeeShopping);

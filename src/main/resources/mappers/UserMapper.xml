@@ -35,4 +35,15 @@
 			"user_id"=#{userId}
 	</select>
 
+	<update id="changeAvatar" parameterType="com.entity.CoffeeUser">
+		update COFFEE_USER
+		<set>
+			"user_portrait"=#{userPortrait},
+			"updated_time" = sysdate
+		</set>
+		<where>
+			"user_id"=#{userId}
+		</where>
+	</update>
+
 </mapper>
