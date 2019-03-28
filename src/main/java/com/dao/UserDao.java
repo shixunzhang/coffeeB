@@ -21,4 +21,11 @@ public interface UserDao {
 	 * @return
 	 */
 	int changeAvatar(CoffeeUser coffeeUser);
+
+	/**
+	 * 更新外卖、自提状态
+	 * @param coffeeUser
+	 * @return
+	 */
+    int changeTakeOut(CoffeeUser coffeeUser);
 }

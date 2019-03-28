@@ -2,6 +2,7 @@ package com.service;
 
 
 import com.common.ServerResponse;
+import com.entity.CoffeeOrder;
 import com.entity.CoffeeShopping;
 
 import java.util.List;
@@ -35,4 +36,11 @@ public interface ShoppingService {
      * @return
      */
     int deleteShopping(CoffeeShopping coffeeShopping);
+
+    /**
+     * 根据id查找购物车信息
+     * @param id
+     * @return
+     */
+    CoffeeShopping findShoppingById(Integer id);
 }

@@ -56,5 +56,17 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	/**
+	 * 更新外卖 自提状态
+	 * @param coffeeUser
+	 * @return
+	 */
+	@Override
+	public int changeTakeOut(CoffeeUser coffeeUser) {
+		int result = userDao.changeTakeOut(coffeeUser);
+
+		return result;
+	}
+
 
 }

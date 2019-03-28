@@ -17,5 +17,6 @@ public class CoffeeUser {
     private int deletedFlag;
     private String userNick;
     private String userPassword;
+    private int takeOut;
 
 }

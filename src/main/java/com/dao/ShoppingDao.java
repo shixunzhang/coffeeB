@@ -14,4 +14,11 @@ public interface ShoppingDao {
     int updateShopping(CoffeeShopping coffeeShopping);
 
     int deleteShopping(CoffeeShopping coffeeShopping);
+
+    /**
+     * 查找购物车信息
+     * @param shoppingId
+     * @return
+     */
+    CoffeeShopping findShoppingById(Integer shoppingId);
 }

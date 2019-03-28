@@ -26,6 +26,13 @@
         AND "deleted_flag" =0 ORDER BY "updated_time" DESC
     </select>
 
+    <select id="findShoppingById" parameterType="java.lang.Integer" resultType="com.entity.CoffeeShopping">
+        select *
+        from   COFFEE_SHOPPING
+        where "shopping_id"= #{shoppingId}
+        AND "deleted_flag" =0
+    </select>
+
     <insert id="insertInt" parameterType="com.entity.CoffeeShopping">
         insert into COFFEE_SHOPPING(
                 "user_id",

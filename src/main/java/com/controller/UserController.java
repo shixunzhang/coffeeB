@@ -66,4 +66,20 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * 更换外卖、自提状态
+	 * @param coffeeUser
+	 * @return
+	 */
+	@RequestMapping(value = "/change-take-out.do",method = RequestMethod.POST)
+	public ServerResponse<Integer> changeTakeOut(@RequestBody CoffeeUser coffeeUser) {
+		int result = userService.changeTakeOut(coffeeUser);
+		if(result==1){
+			return ServerResponse.createBySuccessMessage("更换状态成功");
+		}
+		else{
+			return ServerResponse.createByErrorMessage("更换状态失败");
+		}
+	}
+
 }

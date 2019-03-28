@@ -7,7 +7,7 @@ import com.entity.User;
 public interface UserService {
 	/**
 	 * 账号密码登录
-	 * @param userPhone
+	 * @param userId
 	 * @param password
 	 * @return
 	 */
@@ -15,7 +15,7 @@ public interface UserService {
 
 	/**
 	 * 查询用户信息
-	 * @param coffeeUser
+	 * @param userId
 	 * @return
 	 */
     ServerResponse<CoffeeUser> findUserById(int userId);
@@ -26,4 +26,11 @@ public interface UserService {
 	 * @return
 	 */
 	int changeAvatar(CoffeeUser coffeeUser);
+
+	/**
+	 * 更换外卖、自提状态
+	 * @param coffeeUser
+	 * @return
+	 */
+    int changeTakeOut(CoffeeUser coffeeUser);
 }

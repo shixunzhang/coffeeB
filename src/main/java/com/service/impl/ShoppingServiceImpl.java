@@ -2,6 +2,7 @@ package com.service.impl;
 
 import com.common.ServerResponse;
 import com.dao.ShoppingDao;
+import com.entity.CoffeeOrder;
 import com.entity.CoffeeShopping;
 import com.service.ShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,18 @@ public class ShoppingServiceImpl implements ShoppingService {
     @Override
     public int deleteShopping(CoffeeShopping coffeeShopping) {
         int result =shoppingDao.deleteShopping(coffeeShopping);
-
         return result;
+    }
+
+    /**
+     * 查找购物查信息
+     * @param id
+     * @return
+     */
+    @Override
+    public CoffeeShopping findShoppingById(Integer id) {
+        CoffeeShopping coffeeShopping = shoppingDao.findShoppingById(id);
+
+        return coffeeShopping;
     }
 }

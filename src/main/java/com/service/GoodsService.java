@@ -13,4 +13,5 @@ public interface GoodsService {
      * @return
      */
     ServerResponse<List<CoffeeGoods>> findGoodsList(int type);
+
 }

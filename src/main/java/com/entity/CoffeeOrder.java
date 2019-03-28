@@ -21,5 +21,6 @@ public class CoffeeOrder {
     private int goodsSugar;
     private String orderNo;
     private String goodName;
+    private int takeOut;
 
 }
