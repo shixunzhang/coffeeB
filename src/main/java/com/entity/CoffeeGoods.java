@@ -18,5 +18,8 @@ public class CoffeeGoods {
     private Date updateTime;
     private int deletedFlag;
 
+    private Integer pageNum;
+    private Integer pageSize;
+
 
 }

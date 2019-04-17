@@ -5,7 +5,6 @@
         <property name="FILE_NAME">finance-pay</property>
     </properties>
 
-
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
@@ -53,20 +52,22 @@
             <appender-ref ref="consoleAppender"/>
         </logger>
 
+        <logger name="java.sql.ResultSet" additivity="true">
+            <level value="DEBUG"/>
+            <appender-ref ref="consoleAppender"/>
+        </logger>
+
         <!-- Spring -->
         <logger name="org.springframework" additivity="true">
             <level value="ERROR"/>
             <appender-ref ref="consoleAppender"/>
         </logger>
 
-        <!-- ActiveMQ -->
-        <logger name="org.apache.activemq" additivity="true">
-            <level value="ERROR"/>
-            <appender-ref ref="consoleAppender"/>
-        </logger>
-
-        <!-- <Logger name="com.cssweb.test.app" level="trace" additivity="true"> 
-            <AppenderRef ref="running-log" /> </Logger> -->
+        <!--&lt;!&ndash; ActiveMQ &ndash;&gt;-->
+        <!--<logger name="org.apache.activemq" additivity="true">-->
+            <!--<level value="ERROR"/>-->
+            <!--<appender-ref ref="consoleAppender"/>-->
+        <!--</logger>-->
 
         <Root level="debug">
                <!-- 这里是输入到文件，很重要-->

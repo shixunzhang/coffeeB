@@ -24,4 +24,16 @@
         where "goods_category"= #{goodsCategory} AND "deleted_flag" =0 ORDER BY "updated_time" DESC
     </select>
 
+    <select id="goodsList"  parameterType="com.entity.CoffeeGoods" resultMap="GoodsList">
+        select *
+        from   COFFEE_GOODS
+        where "goods_category"= #{goodsCategory} AND "deleted_flag" =0 ORDER BY "updated_time" DESC
+    </select>
+
+    <select id="goodsListHelper"  parameterType="com.entity.CoffeeGoods" resultMap="GoodsList">
+        select *
+        from   COFFEE_GOODS
+        where "goods_category"= #{goodsCategory} AND "deleted_flag" =0 ORDER BY "updated_time" DESC
+    </select>
+
 </mapper>
