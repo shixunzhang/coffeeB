@@ -8,7 +8,7 @@ import java.util.Date;
 public class CoffeeShopping {
     private int shoppingId;
     private int userId;
-    private int goodsId;
+    private int goodId;
     private int shoppingNumber;
     private double totalPrice;
     private  int goodCategory;

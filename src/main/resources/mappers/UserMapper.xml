@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.UserDao">
-	
-    <select id="findUserByPhone"  parameterType="java.lang.String" resultType="com.entity.User">
-   		 select 
-   		 USER_ID as userId,PASSWORD as passWord
-   		 from TBM_SEC
-   		 where 
-   		 USER_ID=#{userId}
- 	</select>
 
 	<resultMap type="com.entity.CoffeeUser" id="findByIdMap">
 		<id column="user_id" property="userId"></id>
@@ -25,7 +17,13 @@
 		<result column="deleted_flag" property="deletedFlag"></result>
 	</resultMap>
 
-
+	<select id="findUserByPhone"  parameterType="java.lang.String" resultMap="findByIdMap">
+		select
+			*
+		from COFFEE_USER
+		where
+			"user_phone"=#{userPhone} and "deleted_flag"=0
+	</select>
 
 	<select id="findUserById"  parameterType="java.lang.Integer" resultMap="findByIdMap">
 		SELECT
@@ -57,5 +55,60 @@
 			"user_id"=#{userId}
 		</where>
 	</update>
+
+	<update id="changeSex" parameterType="com.entity.CoffeeUser">
+		update COFFEE_USER
+		<set>
+			"user_sex"=#{userSex},
+			"updated_time" = sysdate
+		</set>
+		<where>
+			"user_id"=#{userId}
+		</where>
+	</update>
+
+
+	<update id="updateUserMsg" parameterType="com.entity.CoffeeUser">
+		update COFFEE_USER
+		<set >
+			<if test="userName != null" >
+				"user_name" = #{userName},
+			</if>
+			<if test="userPhone != null" >
+				"user_phone" = #{userPhone},
+			</if>
+			<if test="userAddress != null" >
+				"user_address" = #{userAddress},
+			</if>
+			<if test="userNick != null" >
+				"user_nick" = #{userNick},
+			</if>
+			<if test="userPassword != null" >
+				"user_password" = #{userPassword},
+			</if>
+			"updated_time" = sysdate
+		</set>
+		where
+		      "user_id"=#{userId}
+	</update>
+
+	<insert id="createUser" parameterType="com.entity.CoffeeUser">
+		insert into COFFEE_USER(
+			"user_name",
+			"user_phone",
+			"user_portrait",
+			"user_nick",
+			"user_password",
+		    "user_address"
+		)
+		values (
+				   #{userName},
+				   #{userPhone},
+				   #{userPortrait},
+				   #{userNick},
+				   #{userPassword},
+		           #{userAddress}
+			   )
+	</insert>
 
 </mapper>

@@ -40,12 +40,31 @@ public class ShoppingController {
      */
     @RequestMapping(value = "/addShopping.do",method = RequestMethod.POST)
     public ServerResponse<Integer>addShopping(@RequestBody CoffeeShopping coffeeShopping){
-        int result = shoppingService.addShopping(coffeeShopping);
-        if(result==1){
-            return ServerResponse.createBySuccessMessage("加入购物车成功");
-        }
-        else{
-            return ServerResponse.createByErrorMessage("加入购物车失败");
+        System.out.println(coffeeShopping.getUserId());
+        System.out.println(coffeeShopping.getGoodId());
+        System.out.println(coffeeShopping.getGoodSize());
+        System.out.println(coffeeShopping.getGoodSugar());
+        CoffeeShopping shoppingGoods = shoppingService.findShoppingByGoods(coffeeShopping);
+        if(shoppingGoods!=null){
+            double price=shoppingGoods.getTotalPrice()+coffeeShopping.getTotalPrice();
+            int number = shoppingGoods.getShoppingNumber()+coffeeShopping.getShoppingNumber();
+            shoppingGoods.setGoodPrice(price);
+            shoppingGoods.setShoppingNumber(number);
+            int result = shoppingService.updateShopping(shoppingGoods);
+            if(result==1){
+                return ServerResponse.createBySuccessMessage("加入购物车成功");
+            }
+            else{
+                return ServerResponse.createByErrorMessage("加入购物车失败");
+            }
+        }else{
+            int result = shoppingService.addShopping(coffeeShopping);
+            if(result==1){
+                return ServerResponse.createBySuccessMessage("加入购物车成功");
+            }
+            else{
+                return ServerResponse.createByErrorMessage("加入购物车失败");
+            }
         }
     }
 

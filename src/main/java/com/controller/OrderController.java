@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.common.ServerResponse;
+import com.common.Uuid;
 import com.entity.CoffeeOrder;
 import com.entity.CoffeeShopping;
 import com.entity.CoffeeUser;
@@ -25,6 +26,9 @@ public class OrderController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ShoppingService shoppingService;
+
     /**
      * 查询订单列表
      * @param coffeeOrder
@@ -41,42 +45,44 @@ public class OrderController {
         }
     }
 
-//    @RequestMapping(value = "/insertList.do",method = RequestMethod.POST)
-////    public ServerResponse<Integer> insertOrder(@RequestBody ArrayList<CoffeeOrder> coffeeOrders) {
-//    public ServerResponse<Integer> insertOrder(@RequestBody ArrayList<CoffeeOrder> coffeeOrders) {
-//        int result = orderService.insertOrder(coffeeOrders);
-//        if(result>0){
-//            return ServerResponse.createBySuccessMessage("加入订单成功");
-//        }
-//        else{
-//            return ServerResponse.createByErrorMessage("加入订单失败");
-//        }
-//    }
-
+    /**
+     * 下单（购物车加入订单）
+     * @param idsDto
+     * @return
+     */
     @RequestMapping(value = "/insertList.do",method = RequestMethod.POST)
     public ServerResponse<Integer> insert(@RequestBody IdsDto idsDto) {
-        System.out.println(idsDto.getShoppingList());
         ArrayList<CoffeeOrder> coffeeOrders = new ArrayList<>();
+//        查询用户信息
         ServerResponse<CoffeeUser> coffeeUser = userService.findUserById(idsDto.getIdInt());
-        System.out.println(coffeeUser.getData());
+//        生成uuid
+        String orderNo = Uuid.getUUID32();
+//        设置order信息
         for (CoffeeShopping  coffeeShopping: idsDto.getShoppingList()) {
             CoffeeOrder coffeeOrder = new CoffeeOrder();
             coffeeOrder.setOrderAddress(coffeeUser.getData().getUserAddress());
             coffeeOrder.setTakeOut(coffeeUser.getData().getTakeOut());
-            coffeeOrder.setOrderNo("123456789");
+            coffeeOrder.setOrderNo(orderNo);
             coffeeOrder.setGoodName(coffeeShopping.getGoodName());
             coffeeOrder.setUserId(coffeeShopping.getUserId());
             coffeeOrder.setOrderNumber(coffeeShopping.getShoppingNumber());
             coffeeOrder.setTotalPrice(coffeeShopping.getTotalPrice());
-            coffeeOrder.setGoodsId(coffeeShopping.getGoodsId());
+            coffeeOrder.setGoodsId(coffeeShopping.getGoodId());
             coffeeOrder.setGoodsSize(coffeeShopping.getGoodSize());
             coffeeOrder.setGoodsSugar(coffeeShopping.getGoodSugar());
             coffeeOrders.add(coffeeOrder);
         }
-        System.out.println(coffeeOrders);
         int result = orderService.insertOrder(coffeeOrders);
         if(result>0){
-            return ServerResponse.createBySuccessMessage("加入订单成功");
+            System.out.println(idsDto.getShoppingList());
+            int insert = shoppingService.updateShoppingList(idsDto.getShoppingList());
+            System.out.println(insert);
+            if(insert>0){
+                return ServerResponse.createBySuccessMessage("加入订单成功");
+            }
+            else{
+                return ServerResponse.createByErrorMessage("加入订单失败");
+            }
         }
         else{
             return ServerResponse.createByErrorMessage("加入订单失败");

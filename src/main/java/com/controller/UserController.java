@@ -3,7 +3,6 @@ package com.controller;
 
 import com.common.ServerResponse;
 import com.entity.CoffeeUser;
-import com.entity.User;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +15,15 @@ public class UserController {
 	
 	@Autowired  
 	private UserService userService;
-		
+
+	/**
+	 * 用户手机号、密码登录
+	 * @param coffeeUser
+	 * @return
+	 */
 	@RequestMapping(value = "/login.do",method = RequestMethod.POST)
-	public ServerResponse<User> login(@RequestBody User user) {
-		System.out.println(user.getUserId());
-		System.out.println(user.getPassWord());
-		ServerResponse<User> result=userService.findUserByPhone(user.getUserId(),user.getPassWord());
-		
+	public ServerResponse<CoffeeUser> login(@RequestBody CoffeeUser coffeeUser) {
+		ServerResponse<CoffeeUser> result=userService.loginByPhone(coffeeUser);
 		if(result != null){
 			return result;
 		}
@@ -38,7 +39,6 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/detail.do",method = RequestMethod.POST)
 	public ServerResponse<CoffeeUser> detail(@RequestBody CoffeeUser coffeeUser) {
-
 		ServerResponse<CoffeeUser> result=userService.findUserById(coffeeUser.getUserId());
 
 		if(result != null){
@@ -81,5 +81,57 @@ public class UserController {
 			return ServerResponse.createByErrorMessage("更换状态失败");
 		}
 	}
+
+	/**
+	 * 更改用户基本信息
+	 * @param coffeeUser
+	 * @return
+	 */
+	@RequestMapping(value = "/updateUserMsg.do",method = RequestMethod.POST)
+	public ServerResponse<CoffeeUser> updateUserMsg(@RequestBody CoffeeUser coffeeUser) {
+		int result= userService.updateUserMsg(coffeeUser);
+		if(result==1){
+			return ServerResponse.createBySuccessMessage("更新成功");
+		}
+		else{
+			return ServerResponse.createByErrorMessage("更新失败");
+		}
+	}
+
+	/**
+	 * 更新用户性别
+	 * @param coffeeUser
+	 * @return
+	 */
+	@RequestMapping(value = "/change-sex.do",method = RequestMethod.POST)
+	public ServerResponse<Integer> changeSex(@RequestBody CoffeeUser coffeeUser) {
+		int result = userService.changeSex(coffeeUser);
+		if(result==1){
+			return ServerResponse.createBySuccessMessage("更新性别成功");
+		}
+		else{
+			return ServerResponse.createByErrorMessage("更新性别失败");
+		}
+	}
+
+	/**
+	 * 注册新用户
+	 * @param coffeeUser
+	 * @return
+	 */
+	@RequestMapping(value = "/register.do",method = RequestMethod.POST)
+	public ServerResponse<CoffeeUser> register(@RequestBody CoffeeUser coffeeUser) {
+		ServerResponse<CoffeeUser> result = userService.register(coffeeUser);
+//		if(result==1){
+		return result;
+//			return ServerResponse.createBySuccessMessage("注册用户成功");
+//		}
+//		else{
+//			return ServerResponse.createByErrorMessage("注册用户失败");
+//		}
+	}
+
+
+
 
 }

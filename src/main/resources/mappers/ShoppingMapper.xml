@@ -6,7 +6,7 @@
     <resultMap type="com.entity.CoffeeShopping" id="ShoppingList">
         <id column="shopping_id" property="shoppingId"></id>
         <result column="user_id" property="userId"></result>
-        <result column="good_id" property="goodsId"></result>
+        <result column="good_id" property="goodId"></result>
         <result column="good_name" property="goodName"></result>
         <result column="good_category" property="goodCategory"></result>
         <result column="shopping_number" property="shoppingNumber"></result>
@@ -33,6 +33,20 @@
         AND "deleted_flag" =0
     </select>
 
+    <select id="findShoppingByGoods" parameterType="com.entity.CoffeeShopping" resultMap="ShoppingList">
+        SELECT
+            *
+        FROM
+            COFFEE_SHOPPING
+        WHERE
+            "good_size"=#{goodSize}
+          AND "good_sugar"=#{goodSugar}
+          AND "good_id"=#{goodId}
+          AND "user_id"=#{userId}
+          AND "deleted_flag"=0
+    </select>
+
+
     <insert id="insertInt" parameterType="com.entity.CoffeeShopping">
         insert into COFFEE_SHOPPING(
                 "user_id",
@@ -47,7 +61,7 @@
                 )
         values (
                 #{userId},
-                #{goodsId},
+                #{goodId},
                 #{goodName},
                 #{shoppingNumber},
                 #{totalPrice},
@@ -75,13 +89,26 @@
         update COFFEE_SHOPPING
         <set>
             "deleted_flag"=1,
-            "updated_time" = sysdate
+            "updated_time"=sysdate
         </set>
         <where>
             "shopping_id"=#{shoppingId}
         </where>
     </update>
 
+    <update id="updateShoppingList"  parameterType="java.util.List">
+            update  COFFEE_SHOPPING
+            <set>
+                "deleted_flag"=1,
+                "updated_time"=sysdate
+            </set>
+            <where>
+                "shopping_id" IN
+                <foreach collection="shoppingList" item="item" open="(" separator="," close=")">
+                    #{item.shoppingId}
+                </foreach>
+            </where>
 
+    </update>
 
 </mapper>

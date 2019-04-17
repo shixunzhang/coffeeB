@@ -5,6 +5,7 @@ import com.common.ServerResponse;
 import com.entity.CoffeeOrder;
 import com.entity.CoffeeShopping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ShoppingService {
@@ -43,4 +44,18 @@ public interface ShoppingService {
      * @return
      */
     CoffeeShopping findShoppingById(Integer id);
+
+    /**
+     * 加入订单后批量更新delete_flag
+     * @param shoppingList
+     * @return
+     */
+    int updateShoppingList(ArrayList<CoffeeShopping> shoppingList);
+
+    /**
+     * 下单前查询是否存在该商品
+     * @param coffeeShopping
+     * @return
+     */
+    CoffeeShopping findShoppingByGoods(CoffeeShopping coffeeShopping);
 }

@@ -2,12 +2,12 @@ package com.service.impl;
 
 import com.common.ServerResponse;
 import com.dao.ShoppingDao;
-import com.entity.CoffeeOrder;
 import com.entity.CoffeeShopping;
 import com.service.ShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("ShoppingService")
@@ -16,6 +16,11 @@ public class ShoppingServiceImpl implements ShoppingService {
     @Autowired
     private ShoppingDao shoppingDao;
 
+    /**
+     * 查找购物车商品信息
+     * @param userId
+     * @return
+     */
     @Override
     public ServerResponse<List<CoffeeShopping>> selectList(int userId) {
         List<CoffeeShopping> list = shoppingDao.selectList(userId);
@@ -28,6 +33,11 @@ public class ShoppingServiceImpl implements ShoppingService {
         }
     }
 
+    /**
+     * 添加商品到购物车
+     * @param coffeeShopping
+     * @return
+     */
     @Override
     public int addShopping(CoffeeShopping coffeeShopping) {
         int result = shoppingDao.insertInt(coffeeShopping);
@@ -35,13 +45,13 @@ public class ShoppingServiceImpl implements ShoppingService {
         return result;
     }
 
+    /**
+     * 更新购物车信息
+     * @param coffeeShopping
+     * @return
+     */
     @Override
     public int updateShopping(CoffeeShopping coffeeShopping) {
-//        Date day = new Date();
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String time = df.format(day);
-//        coffeeShopping.setUpdatedTime(new Date());
-//        int result = shoppingDao.updateShopping(coffeeShopping,time);
         int result = shoppingDao.updateShopping(coffeeShopping);
 
         return result;
@@ -54,7 +64,7 @@ public class ShoppingServiceImpl implements ShoppingService {
     }
 
     /**
-     * 查找购物查信息
+     * 查找购物车信息
      * @param id
      * @return
      */
@@ -63,5 +73,27 @@ public class ShoppingServiceImpl implements ShoppingService {
         CoffeeShopping coffeeShopping = shoppingDao.findShoppingById(id);
 
         return coffeeShopping;
+    }
+
+    /**
+     * 加入订单后批量更新
+     * @param shoppingList
+     * @return
+     */
+    @Override
+    public int updateShoppingList(ArrayList<CoffeeShopping> shoppingList) {
+        int result = shoppingDao.updateShoppingList(shoppingList);
+        return result;
+    }
+
+    /**
+     * 通过shoppingModel 查询数据（添加前查询是否已经添加）
+     * @param coffeeShopping
+     * @return
+     */
+    @Override
+    public CoffeeShopping findShoppingByGoods(CoffeeShopping coffeeShopping) {
+        CoffeeShopping coffeeShopping1 = shoppingDao.findShoppingByGoods(coffeeShopping);
+        return coffeeShopping1;
     }
 }

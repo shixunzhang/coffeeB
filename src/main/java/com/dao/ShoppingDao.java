@@ -1,6 +1,9 @@
 package com.dao;
 
 import com.entity.CoffeeShopping;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ShoppingDao {
@@ -21,4 +24,18 @@ public interface ShoppingDao {
      * @return
      */
     CoffeeShopping findShoppingById(Integer shoppingId);
+
+    /**
+     * 批量更新购物车
+     * @param shoppingList
+     * @return
+     */
+    int updateShoppingList(@Param("shoppingList") ArrayList<CoffeeShopping> shoppingList);
+
+    /**
+     * 添加前查询是否已经添加
+     * @param coffeeShopping
+     * @return
+     */
+    CoffeeShopping findShoppingByGoods(CoffeeShopping coffeeShopping);
 }

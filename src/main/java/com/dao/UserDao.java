@@ -1,12 +1,9 @@
 package com.dao;
 
 import com.entity.CoffeeUser;
-import com.entity.User;
-import org.apache.ibatis.annotations.Param;
 
 public interface UserDao {
-	//登录
-	User findUserByPhone(String userId);
+
 
 	/**
 	 * 查询用户信息
@@ -28,4 +25,32 @@ public interface UserDao {
 	 * @return
 	 */
     int changeTakeOut(CoffeeUser coffeeUser);
+
+	/**
+	 * 根据手机号码查询用户信息
+	 * @param userPhone
+	 * @return
+	 */
+	CoffeeUser findUserByPhone(String userPhone);
+
+	/**
+	 * 更改用户基本信息
+	 * @param coffeeUser
+	 * @return
+	 */
+	int updateUserMsg(CoffeeUser coffeeUser);
+
+	/**
+	 * 更新用户性别信息
+	 * @param coffeeUser
+	 * @return
+	 */
+	int changeSex(CoffeeUser coffeeUser);
+
+    /**
+     * 创建新用户
+     * @param coffeeUser
+     * @return
+     */
+    int createUser(CoffeeUser coffeeUser);
 }
