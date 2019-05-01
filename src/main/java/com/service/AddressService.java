@@ -10,4 +10,11 @@ public interface AddressService {
      * @return
      */
     int addAddress(CoffeeAddress coffeeAddress);
+
+    /**
+     * 查询收货地址
+     * @param addressId
+     * @return
+     */
+    String getAddressById(int addressId);
 }

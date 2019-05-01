@@ -1,7 +1,9 @@
 package com.service.impl;
 
 import com.common.ServerResponse;
+import com.dao.AddressDao;
 import com.dao.UserDao;
+import com.entity.CoffeeAddress;
 import com.entity.CoffeeUser;
 import com.entity.PhoneDto;
 import com.service.UserService;
@@ -14,6 +16,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDao userDao;
+
+	private AddressDao addressDao;
 
 //	public ServerResponse<User> findUserByPhone(String userId, String password) {
 //		User user = userDao.findUserByPhone(userId);
@@ -126,7 +130,7 @@ public class UserServiceImpl implements UserService {
 			coffeeUser.setUserName("用户");
 			coffeeUser.setUserPortrait("/static/images/touxiang/touxiang1.jpg");
 			coffeeUser.setUserNick("用户");
-			coffeeUser.setUserAddress("大连");
+//			coffeeUser.setUserAddress(-1);
 			System.out.println(coffeeUser);
 			int result = userDao.createUser(coffeeUser);
 			if(result==1){

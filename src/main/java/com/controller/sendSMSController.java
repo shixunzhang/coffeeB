@@ -99,37 +99,37 @@ public class sendSMSController {
         }
     }
 
-//    @RequestMapping(value = "/register.do",method = RequestMethod.POST)
-//    public ServerResponse<CoffeeUser> register(@RequestBody PhoneDto phoneDto, HttpServletRequest request) {
-//        HttpSession session = request.getSession();//设置session
-//        String phone =(String) session.getAttribute("phone");
-//        String codeKey =(String) session.getAttribute("codeKey");
-//
-//        if(phone==null || codeKey==null){
-//            return ServerResponse.createByErrorMessage("验证码已过期，请重新获取");
-//        }
-//
-//        System.out.println(phone);
-//        System.out.println(codeKey);
-//        System.out.println(phoneDto.getPassword());
-//        if(!phone.equals(phoneDto.getPhone())){
-//            return ServerResponse.createByErrorMessage("两次输入的手机号不一致");
-//        }
-//        if(!codeKey.equals(phoneDto.getValidate())){
-//            return ServerResponse.createByErrorMessage("验证码错误");
-//        }
-//        CoffeeUser coffeeUser = new CoffeeUser();
-//        coffeeUser.setUserPhone(phoneDto.getPhone());
-//        coffeeUser.setUserPassword(phoneDto.getPassword());
-//        System.out.println(coffeeUser);
-//        ServerResponse<CoffeeUser> result = userService.register(coffeeUser);
-//        if(result != null){
-//            return result;
-//        }
-//        else{
-//            return ServerResponse.createByErrorMessage("注册失败");
-//        }
-//    }
+    @RequestMapping(value = "/register.do",method = RequestMethod.POST)
+    public ServerResponse<CoffeeUser> register(@RequestBody PhoneDto phoneDto, HttpServletRequest request) {
+        HttpSession session = request.getSession();//设置session
+        String phone =(String) session.getAttribute("phone");
+        String codeKey =(String) session.getAttribute("codeKey");
+
+        if(phone==null || codeKey==null){
+            return ServerResponse.createByErrorMessage("验证码已过期，请重新获取");
+        }
+
+        System.out.println(phone);
+        System.out.println(codeKey);
+        System.out.println(phoneDto.getPassword());
+        if(!phone.equals(phoneDto.getPhone())){
+            return ServerResponse.createByErrorMessage("两次输入的手机号不一致");
+        }
+        if(!codeKey.equals(phoneDto.getValidate())){
+            return ServerResponse.createByErrorMessage("验证码错误");
+        }
+        CoffeeUser coffeeUser = new CoffeeUser();
+        coffeeUser.setUserPhone(phoneDto.getPhone());
+        coffeeUser.setUserPassword(phoneDto.getPassword());
+        System.out.println(coffeeUser);
+        ServerResponse<CoffeeUser> result = userService.register(coffeeUser);
+        if(result != null){
+            return result;
+        }
+        else{
+            return ServerResponse.createByErrorMessage("注册失败");
+        }
+    }
 
 
 }

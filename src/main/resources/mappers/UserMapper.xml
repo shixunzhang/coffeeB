@@ -98,16 +98,14 @@
 			"user_phone",
 			"user_portrait",
 			"user_nick",
-			"user_password",
-		    "user_address"
+			"user_password"
 		)
 		values (
 				   #{userName},
 				   #{userPhone},
 				   #{userPortrait},
 				   #{userNick},
-				   #{userPassword},
-		           #{userAddress}
+				   #{userPassword}
 			   )
 	</insert>
 

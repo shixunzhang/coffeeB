@@ -15,7 +15,7 @@ public class AddressController {
     private AddressService addressService;
 
     @RequestMapping(value = "/increase.do",method = RequestMethod.POST)
-    public ServerResponse<Integer> addFeedBack(@RequestBody CoffeeAddress coffeeAddress){
+    public ServerResponse<Integer> addAddress(@RequestBody CoffeeAddress coffeeAddress){
         int result = addressService.addAddress(coffeeAddress);
         if(result==1){
             return ServerResponse.createBySuccessMessage("加入收货地址成功");
@@ -24,5 +24,10 @@ public class AddressController {
             return ServerResponse.createByErrorMessage("加入收货地址失败");
         }
     }
+
+//    @RequestMapping(value = "/insertAddress.do",method = RequestMethod.POST)
+//    public ServerResponse<CoffeeAddress> insertAddress(@RequestBody CoffeeAddress coffeeAddress){
+//
+//    }
 
 }

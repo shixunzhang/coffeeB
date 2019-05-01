@@ -10,7 +10,7 @@ public class CoffeeUser {
     private String userName;
     private int userSex;
     private String userPhone;
-    private String userAddress;
+    private int userAddress;
     private String userPortrait;
     private Date createdTime;
     private Date updatedTime;

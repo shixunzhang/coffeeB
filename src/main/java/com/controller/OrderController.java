@@ -6,6 +6,7 @@ import com.entity.CoffeeOrder;
 import com.entity.CoffeeShopping;
 import com.entity.CoffeeUser;
 import com.entity.IdsDto;
+import com.service.AddressService;
 import com.service.OrderService;
 import com.service.ShoppingService;
 import com.service.UserService;
@@ -28,6 +29,9 @@ public class OrderController {
 
     @Autowired
     private ShoppingService shoppingService;
+
+    @Autowired
+    private AddressService addressService;
 
     /**
      * 查询订单列表
@@ -55,12 +59,23 @@ public class OrderController {
         ArrayList<CoffeeOrder> coffeeOrders = new ArrayList<>();
 //        查询用户信息
         ServerResponse<CoffeeUser> coffeeUser = userService.findUserById(idsDto.getIdInt());
+//        查询是否添加收货地址
+        if(coffeeUser.getData().getTakeOut()==1 && coffeeUser.getData().getUserAddress()==-1){
+            return ServerResponse.createByErrorMessage("外卖状态请先添加收货地址");
+        }
+        String address = "";
+//        查询用户收货地址
+        if(coffeeUser.getData().getTakeOut()==0){
+            address = "-1";
+        }else {
+            address = addressService.getAddressById(coffeeUser.getData().getUserAddress());
+        }
 //        生成uuid
         String orderNo = Uuid.getUUID32();
 //        设置order信息
         for (CoffeeShopping  coffeeShopping: idsDto.getShoppingList()) {
             CoffeeOrder coffeeOrder = new CoffeeOrder();
-            coffeeOrder.setOrderAddress(coffeeUser.getData().getUserAddress());
+            coffeeOrder.setOrderAddress(address);
             coffeeOrder.setTakeOut(coffeeUser.getData().getTakeOut());
             coffeeOrder.setOrderNo(orderNo);
             coffeeOrder.setGoodName(coffeeShopping.getGoodName());
