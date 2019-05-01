@@ -2,6 +2,7 @@ package com.service;
 
 import com.common.ServerResponse;
 import com.entity.CoffeeUser;
+import com.entity.PhoneDto;
 
 public interface UserService {
 
@@ -53,4 +54,11 @@ public interface UserService {
 	 * @return
 	 */
     ServerResponse<CoffeeUser> register(CoffeeUser coffeeUser);
+
+	/**
+	 * 验证码登录
+	 * @param phoneDto
+	 * @return
+	 */
+	ServerResponse<CoffeeUser> loginByValidate(PhoneDto phoneDto);
 }

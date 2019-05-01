@@ -3,6 +3,7 @@ package com.service.impl;
 import com.common.ServerResponse;
 import com.dao.UserDao;
 import com.entity.CoffeeUser;
+import com.entity.PhoneDto;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -133,6 +134,17 @@ public class UserServiceImpl implements UserService {
 			}else{
 				return  ServerResponse.createByErrorMessage("新建用户时发生错误");
 			}
+		}
+	}
+
+	@Override
+	public ServerResponse<CoffeeUser> loginByValidate(PhoneDto phoneDto) {
+		CoffeeUser userResult = userDao.findUserByPhone(phoneDto.getPhone());
+		if(userResult==null){
+			return ServerResponse.createByErrorMessage("用户不存在,请先注册");
+		}
+		else{
+			return ServerResponse.createBySuccess(userResult);
 		}
 	}
 }

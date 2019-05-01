@@ -4,8 +4,11 @@ package com.controller;
 import com.common.ServerResponse;
 import com.entity.CoffeeUser;
 import com.service.UserService;
+import javafx.scene.paint.PhongMaterial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
@@ -28,9 +31,10 @@ public class UserController {
 			return result;
 		}
 		else{
-			return ServerResponse.createByErrorMessage("查询失败");
+			return ServerResponse.createByErrorMessage("登录失败");
 		}			
 	}
+
 
 	/**
 	 * 查询用户详细信息
@@ -122,13 +126,12 @@ public class UserController {
 	@RequestMapping(value = "/register.do",method = RequestMethod.POST)
 	public ServerResponse<CoffeeUser> register(@RequestBody CoffeeUser coffeeUser) {
 		ServerResponse<CoffeeUser> result = userService.register(coffeeUser);
-//		if(result==1){
-		return result;
-//			return ServerResponse.createBySuccessMessage("注册用户成功");
-//		}
-//		else{
-//			return ServerResponse.createByErrorMessage("注册用户失败");
-//		}
+		if(result!=null){
+		    return result;
+		}
+		else{
+			return ServerResponse.createByErrorMessage("注册用户失败");
+		}
 	}
 
 
