@@ -49,6 +49,13 @@ public interface UserService {
 	int changeSex(CoffeeUser coffeeUser);
 
 	/**
+	 * 更新用户性别信息
+	 * @param coffeeUser
+	 * @return
+	 */
+	int changeAddress(CoffeeUser coffeeUser);
+
+	/**
 	 * 注册新用户
  	 * @param coffeeUser
 	 * @return

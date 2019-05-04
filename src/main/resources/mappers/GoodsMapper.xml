@@ -4,7 +4,6 @@
 
 
     <resultMap type="com.entity.CoffeeGoods" id="GoodsList">
-
         <id column="goods_id" property="goodsId"></id>
         <result column="goods_name" property="goodsName"></result>
         <result column="goods_name_en" property="goodsNameEn"></result>

@@ -53,4 +53,11 @@ public interface UserDao {
      * @return
      */
     int createUser(CoffeeUser coffeeUser);
+
+	/**
+	 * 修改用户收货地址
+	 * @param coffeeUser
+	 * @return
+	 */
+	int changeAddress(CoffeeUser coffeeUser);
 }

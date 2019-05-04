@@ -115,6 +115,17 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	/**
+	 * 设置用户收货地址
+	 * @param coffeeUser
+	 * @return
+	 */
+	@Override
+	public int changeAddress(CoffeeUser coffeeUser) {
+		int result = userDao.changeAddress(coffeeUser);
+		return result;
+	}
+
 
 	/**
 	 * 注册新用户

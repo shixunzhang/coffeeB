@@ -45,6 +45,18 @@
 		</where>
 	</update>
 
+	<update id="changeAddress" parameterType="com.entity.CoffeeUser">
+		update COFFEE_USER
+		<set>
+			"user_address"=#{userAddress},
+			"updated_time" = sysdate
+		</set>
+		<where>
+			"user_id"=#{userId}
+		</where>
+	</update>
+
+
 	<update id="changeTakeOut" parameterType="com.entity.CoffeeUser">
 		update COFFEE_USER
 		<set>
