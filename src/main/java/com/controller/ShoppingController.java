@@ -34,7 +34,7 @@ public class ShoppingController {
     }
 
     /**
-     * j将商品加入购物车
+     * 将商品加入购物车
      * @param coffeeShopping
      * @return
      */
@@ -44,11 +44,13 @@ public class ShoppingController {
         System.out.println(coffeeShopping.getGoodId());
         System.out.println(coffeeShopping.getGoodSize());
         System.out.println(coffeeShopping.getGoodSugar());
+        System.out.println(coffeeShopping.getTotalPrice());
         CoffeeShopping shoppingGoods = shoppingService.findShoppingByGoods(coffeeShopping);
         if(shoppingGoods!=null){
             double price=shoppingGoods.getTotalPrice()+coffeeShopping.getTotalPrice();
+            System.out.println(price);
             int number = shoppingGoods.getShoppingNumber()+coffeeShopping.getShoppingNumber();
-            shoppingGoods.setGoodPrice(price);
+            shoppingGoods.setTotalPrice(price);
             shoppingGoods.setShoppingNumber(number);
             int result = shoppingService.updateShopping(shoppingGoods);
             if(result==1){

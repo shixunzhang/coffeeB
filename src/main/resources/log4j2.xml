@@ -70,7 +70,7 @@
         <!--</logger>-->
 
         <Root level="debug">
-               <!-- 这里是输入到文件，很重要-->
+               <!-- 这里是输入到文件-->
             <AppenderRef ref="running-log" />
             <!-- 这里是输入到控制台-->
             <AppenderRef ref="Console" />

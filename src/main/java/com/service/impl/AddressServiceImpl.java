@@ -23,7 +23,6 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public int addAddress(CoffeeAddress coffeeAddress) {
         int result = addressDao.insertAddress(coffeeAddress);
-        System.out.println(coffeeAddress.getAddressId());
         if(coffeeAddress.getAddressId()>0){
             return coffeeAddress.getAddressId();
         }else{
