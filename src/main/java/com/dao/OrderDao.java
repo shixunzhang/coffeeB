@@ -22,4 +22,18 @@ public interface OrderDao {
      * @return
      */
     int insertOrder(ArrayList<CoffeeOrder> coffeeOrders);
+
+    /**
+     * 查询用户不重复的no
+     * @param coffeeOrder
+     * @return
+     */
+    List<String> selectDistinctList(CoffeeOrder coffeeOrder);
+
+    /**
+     * 根据orderNo查询订单
+     * @param orderNo
+     * @return
+     */
+    List<CoffeeOrder> selectListByOrderNo(@Param("orderNo") String orderNo);
 }

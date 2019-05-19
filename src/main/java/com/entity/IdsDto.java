@@ -11,6 +11,6 @@ public class IdsDto {
     private int idInt;
     private String idString;
     private List<Integer> idList;
-    private ArrayList<CoffeeOrder> orderList;
+    private List<CoffeeOrder> orderList;
     private ArrayList<CoffeeShopping> shoppingList;
 }

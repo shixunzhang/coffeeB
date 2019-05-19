@@ -26,6 +26,10 @@ public class ServerResponse<T>{
         this.data = data;
     }
 
+    public void setData(T data) {
+        this.data = data;
+    }
+
     public int getStatus(){
         return status;
     } 

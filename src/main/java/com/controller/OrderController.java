@@ -50,6 +50,23 @@ public class OrderController {
     }
 
     /**
+     * 查询订单列表（分数组查询）
+     * @param coffeeOrder
+     * @return
+     */
+    @RequestMapping(value = "/listOrder.do",method = RequestMethod.POST)
+    public ServerResponse<List<IdsDto>> selectOrderList(@RequestBody CoffeeOrder coffeeOrder) {
+        ServerResponse<List<IdsDto>> result = orderService.selectOrderList(coffeeOrder);
+        if(result.isSuccess()){
+            return result;
+        }
+        else{
+            return ServerResponse.createByErrorMessage("查询商品列表失败");
+        }
+    }
+
+
+    /**
      * 下单（购物车加入订单）
      * @param idsDto
      * @return
@@ -85,6 +102,7 @@ public class OrderController {
             coffeeOrder.setGoodsId(coffeeShopping.getGoodId());
             coffeeOrder.setGoodsSize(coffeeShopping.getGoodSize());
             coffeeOrder.setGoodsSugar(coffeeShopping.getGoodSugar());
+            coffeeOrder.setGoodsCategory(coffeeShopping.getGoodCategory());
             coffeeOrders.add(coffeeOrder);
         }
         int result = orderService.insertOrder(coffeeOrders);

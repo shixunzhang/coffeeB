@@ -3,7 +3,9 @@ package com.service.impl;
 import com.common.ServerResponse;
 import com.dao.OrderDao;
 import com.entity.CoffeeOrder;
+import com.entity.IdsDto;
 import com.service.OrderService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +44,37 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public int insertOrder(ArrayList<CoffeeOrder> coffeeOrders) {
-        System.out.println(coffeeOrders);
         int result = orderDao.insertOrder(coffeeOrders);
         return result;
+    }
+
+    /**
+     * 查询订单列表（嵌套数组形式）
+     * @param coffeeOrder
+     * @return
+     */
+    @Override
+    public ServerResponse<List<IdsDto>> selectOrderList(CoffeeOrder coffeeOrder) {
+        System.out.println(coffeeOrder);
+        List<String> noList = orderDao.selectDistinctList(coffeeOrder);
+        System.out.println(noList);
+        List<IdsDto> orderListResult = new ArrayList<>();
+//        orderListResult.setData(new ArrayList<>());
+        for (String orderNo : noList) {
+            System.out.println(orderNo);
+            IdsDto ids = new IdsDto();
+            ids.setOrderList(orderDao.selectListByOrderNo(orderNo));
+//            List<CoffeeOrder> listOrder = orderDao.selectListByOrderNo(orderNo);
+////            if(!listOrder.isEmpty()){
+////                orderListResult.add(listOrder);
+////            }
+            orderListResult.add(ids);
+        }
+        System.out.println(orderListResult);
+        if(!orderListResult.isEmpty()){
+            return ServerResponse.createBySuccess(orderListResult);
+        }else{
+            return ServerResponse.createBySuccess(null);
+        }
     }
 }

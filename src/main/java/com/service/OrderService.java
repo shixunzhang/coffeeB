@@ -2,6 +2,7 @@ package com.service;
 
 import com.common.ServerResponse;
 import com.entity.CoffeeOrder;
+import com.entity.IdsDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,4 +23,11 @@ public interface OrderService {
      * @return
      */
     int insertOrder(ArrayList<CoffeeOrder> coffeeOrders);
+
+    /**
+     * 查询订单（按照嵌套数组形式）
+     * @param coffeeOrder
+     * @return
+     */
+    ServerResponse<List<IdsDto>> selectOrderList(CoffeeOrder coffeeOrder);
 }

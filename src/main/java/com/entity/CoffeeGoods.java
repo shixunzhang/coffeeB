@@ -2,6 +2,7 @@ package com.entity;
 
 import lombok.Data;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Data
@@ -18,7 +19,9 @@ public class CoffeeGoods {
     private Date updateTime;
     private int deletedFlag;
 
+    @Transient
     private Integer pageNum;
+    @Transient
     private Integer pageSize;
 
 

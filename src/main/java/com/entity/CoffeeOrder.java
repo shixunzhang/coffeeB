@@ -22,5 +22,6 @@ public class CoffeeOrder {
     private String orderNo;
     private String goodName;
     private int takeOut;
+    private int goodsCategory;
 
 }

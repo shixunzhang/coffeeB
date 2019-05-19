@@ -16,6 +16,7 @@
         <result column="goods_size" property="goodsSize"></result>
         <result column="goods_sugar" property="goodsSugar"></result>
         <result column="take_out" property="takeOut"></result>
+        <result column="goods_category" property="goodsCategory"></result>
         <result column="created_time" property="createdTime"></result>
         <result column="updated_time" property="updatedTime"></result>
         <result column="deleted_flag" property="deletedFlag"></result>
@@ -29,6 +30,38 @@
             AND "finish_flag" = #{finishFlag}
         </if>
           AND "deleted_flag" =0 ORDER BY "updated_time" DESC
+    </select>
+
+
+    <!--此处resultType为查询返回字段的类型，并不是list(因为使用了distinct 去重复)-->
+    <!--<select id="selectDistinctList" parameterType="com.entity.CoffeeOrder" resultType="java.lang.String">-->
+        <!--select distinct "order_no"-->
+        <!--from COFFEE_ORDER-->
+        <!--WHERE "deleted_flag" = 0-->
+        <!--and "user_id" = #{userId}-->
+        <!--<if test="finishFlag != 3">-->
+            <!--AND "finish_flag" = #{finishFlag}-->
+        <!--</if>-->
+    <!--</select>-->
+
+    <!--resultType返回的是集合中的元素类型，而不是集合本身      !!注意-->
+    <select id="selectDistinctList" parameterType="com.entity.CoffeeOrder" resultType="java.lang.String">
+        select "order_no"
+        from COFFEE_ORDER t
+        where "order_id"=(select min("order_id") from COFFEE_ORDER where "order_no"=t."order_no" )
+        and "deleted_flag" = 0
+        <if test="finishFlag != 3">
+            and "finish_flag" = #{finishFlag}
+        </if>
+        and "user_id" = #{userId}
+        order by "order_id" desc
+    </select>
+
+    <select id="selectListByOrderNo" parameterType="java.lang.String" resultMap="OrderList">
+        select *
+        from COFFEE_ORDER
+        WHERE "deleted_flag" = 0
+        and "order_no" = #{orderNo}
     </select>
     
     <!--<insert id="insertOrder" parameterType="java.util.List" useGeneratedKeys="false">-->
@@ -56,6 +89,7 @@
                    <!--#{item.goodsSugar})-->
                <!--</foreach>-->
     <!--</insert>   -->
+
     <insert id="insertOrder" parameterType="java.util.List" useGeneratedKeys="false">
         insert into COFFEE_ORDER( "user_id",
                                   "order_no",
@@ -66,7 +100,8 @@
                                   "good_name",
                                   "goods_size",
                                   "take_out",
-                                  "goods_sugar")
+                                  "goods_sugar",
+                                 "goods_category")
         select t.* from(
         <foreach collection="list" item="item" separator=" union all ">
             (select
@@ -79,7 +114,8 @@
             #{item.goodName},
             #{item.goodsSize},
             #{item.takeOut},
-            #{item.goodsSugar}
+            #{item.goodsSugar},
+            #{item.goodsCategory}
             from dual)
         </foreach>)t
     </insert>
