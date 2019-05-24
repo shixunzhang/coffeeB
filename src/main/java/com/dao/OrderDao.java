@@ -36,4 +36,30 @@ public interface OrderDao {
      * @return
      */
     List<CoffeeOrder> selectListByOrderNo(@Param("orderNo") String orderNo);
+
+    /**
+     * 管理端查询订单列表
+     * @param coffeeOrder
+     * @return
+     */
+    List<CoffeeOrder> ConsoleOrderList(CoffeeOrder coffeeOrder);
+
+    /**
+     * 查询总数
+     * @return
+     */
+    Integer selectCount(CoffeeOrder coffeeOrder);
+
+    /**
+     * 查询最远的未完成订单
+     * @return
+     */
+    String selectOrderNo();
+
+    /**
+     * 完成订单
+     * @param coffeeOrder
+     * @return
+     */
+    int FinishOrder(CoffeeOrder coffeeOrder);
 }

@@ -15,7 +15,6 @@ public interface GoodsService {
      */
     ServerResponse<List<CoffeeGoods>> findGoodsList(int type);
 
-
     ServerResponse<List<CoffeeGoods>> goodsList(CoffeeGoods coffeeGoods, RowBounds rowBounds);
 
     ServerResponse<List<CoffeeGoods>> goodsListHelper(CoffeeGoods coffeeGoods);

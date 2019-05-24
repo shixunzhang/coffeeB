@@ -1,11 +1,14 @@
 package com.controller;
 
+import com.common.HttpRequest;
 import com.common.ServerResponse;
 import com.common.Uuid;
 import com.entity.CoffeeOrder;
 import com.entity.CoffeeShopping;
 import com.entity.CoffeeUser;
 import com.entity.IdsDto;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.service.AddressService;
 import com.service.OrderService;
 import com.service.ShoppingService;
@@ -13,6 +16,8 @@ import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,6 +124,71 @@ public class OrderController {
         }
         else{
             return ServerResponse.createByErrorMessage("加入订单失败");
+        }
+    }
+
+
+
+
+
+    /**
+     * 查询订单列表
+     * @param coffeeOrder
+     * @return
+     */
+    @RequestMapping(value = "/ConsoleList.do",method = RequestMethod.POST)
+    public ServerResponse<List<CoffeeOrder>> ConsoleOrderList(@RequestBody CoffeeOrder coffeeOrder) {
+        ServerResponse<List<CoffeeOrder>> result = orderService.ConsoleOrderList(coffeeOrder);
+        if(result != null){
+            return result;
+        }
+        else{
+            return ServerResponse.createByErrorMessage("查询商品列表失败");
+        }
+    }
+
+    /**
+     * 查询为完成的单个订单
+     * @param coffeeOrder
+     * @return
+     */
+    @RequestMapping(value = "/ConsoleOrder.do",method = RequestMethod.POST)
+    public ServerResponse<List<CoffeeOrder>> ConsoleOrder(@RequestBody CoffeeOrder coffeeOrder) {
+        ServerResponse<List<CoffeeOrder>> result = orderService.ConsoleOrder(coffeeOrder);
+        if(result != null){
+            return result;
+        }
+        else{
+            return ServerResponse.createByErrorMessage("查询商品列表失败");
+        }
+    }
+
+
+    /**
+     * 订单完成
+     * @param coffeeOrder
+     * @return
+     */
+    @RequestMapping(value = "/FinishOrder.do",method = RequestMethod.POST)
+    public ServerResponse<Integer> FinishOrder(@RequestBody CoffeeOrder coffeeOrder) throws UnsupportedEncodingException {
+        int result = orderService.FinishOrder(coffeeOrder);
+        if(result>0){
+
+            String phones = userService.findUserById(coffeeOrder.getUserId()).getData().getUserPhone();
+            System.out.println(phones);
+            String content = URLEncoder.encode("【咖啡预定App】您的订单已完成，请注意查收。订单号："+coffeeOrder.getOrderNo(),"UTF-8");
+            String postData = "type=send&username=18242094436&password=DA53683DCC2BC2F42A238F1B2F3DBB1A&gwid=dceb8cfa&rece=json&mobile="+phones+"&message="+content+"";
+            String url="http://jk.106api.cn/smsUTF8.aspx";
+            String sendResult= HttpRequest.sendPost(url,postData);
+            JsonObject userJsonObj = new JsonParser().parse(sendResult).getAsJsonObject();
+            String status = userJsonObj .get("returnstatus").toString().replaceAll("\"", "");
+
+            System.out.println(status);
+
+            return ServerResponse.createBySuccessMessage("订单完成成功");
+        }
+        else{
+            return ServerResponse.createByErrorMessage("订单完成失败");
         }
     }
 

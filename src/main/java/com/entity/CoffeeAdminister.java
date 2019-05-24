@@ -6,12 +6,12 @@ import javax.persistence.Transient;
 import java.util.Date;
 
 @Data
-public class CoffeeFeedBack {
+public class CoffeeAdminister {
 
-    private int feedbackId;
-    private int userId;
-    private String feedbackText;
-    private  String contactInformation;
+    private int administerId;
+    private String administerName;
+    private  String administerPassword;
+    private  String administerNick;
     private Date createdTime;
     private Date updateTime;
     private int deletedFlag;

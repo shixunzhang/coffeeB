@@ -4,6 +4,8 @@ import com.common.ServerResponse;
 import com.entity.CoffeeUser;
 import com.entity.PhoneDto;
 
+import java.util.List;
+
 public interface UserService {
 
 	/**
@@ -68,4 +70,11 @@ public interface UserService {
 	 * @return
 	 */
 	ServerResponse<CoffeeUser> loginByValidate(PhoneDto phoneDto);
+
+	/**
+	 * 查找用户列表
+	 * @param coffeeUser
+	 * @return
+	 */
+    ServerResponse<List<CoffeeUser>> findUserList(CoffeeUser coffeeUser);
 }

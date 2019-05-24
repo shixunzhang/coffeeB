@@ -10,9 +10,7 @@ public interface ShoppingDao {
 
     List<CoffeeShopping> selectList(int userId);
 
-
     int insertInt(CoffeeShopping coffeeShopping);
-
 
     int updateShopping(CoffeeShopping coffeeShopping);
 

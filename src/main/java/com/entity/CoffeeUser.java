@@ -2,6 +2,7 @@ package com.entity;
 
 import lombok.Data;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Data
@@ -18,5 +19,12 @@ public class CoffeeUser {
     private String userNick;
     private String userPassword;
     private int takeOut;
+
+    @Transient
+    private Integer pageNum;
+    @Transient
+    private Integer pageSize;
+    @Transient
+    private String addressString;
 
 }

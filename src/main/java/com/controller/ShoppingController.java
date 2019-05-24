@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.common.ServerResponse;
-import com.entity.CoffeeGoods;
 import com.entity.CoffeeShopping;
 import com.service.ShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;

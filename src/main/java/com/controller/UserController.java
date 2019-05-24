@@ -4,11 +4,10 @@ package com.controller;
 import com.common.ServerResponse;
 import com.entity.CoffeeUser;
 import com.service.UserService;
-import javafx.scene.paint.PhongMaterial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @RestController
@@ -18,6 +17,19 @@ public class UserController {
 	
 	@Autowired  
 	private UserService userService;
+
+
+	@RequestMapping(value = "/list.do",method = RequestMethod.POST)
+	public ServerResponse<List<CoffeeUser>> selectList(@RequestBody CoffeeUser coffeeUser) {
+		ServerResponse<List<CoffeeUser>> result = userService.findUserList(coffeeUser);
+		if(result != null){
+			return result;
+		}
+		else{
+			return ServerResponse.createByErrorMessage("查询用户列表失败");
+		}
+	}
+
 
 	/**
 	 * 用户手机号、密码登录

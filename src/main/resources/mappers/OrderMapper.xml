@@ -29,8 +29,45 @@
         <if test="finishFlag != 3">
             AND "finish_flag" = #{finishFlag}
         </if>
-          AND "deleted_flag" =0 ORDER BY "updated_time" DESC
+          AND "deleted_flag" =0 ORDER BY "order_id" DESC
     </select>
+
+
+    <select id="ConsoleOrderList" parameterType="com.entity.CoffeeOrder" resultMap="OrderList">
+        select *
+        from   COFFEE_ORDER
+        where "deleted_flag" =0
+        <if test="finishFlag != 3">
+          AND "finish_flag" = #{finishFlag}
+        </if>
+           ORDER BY "updated_time" DESC
+    </select>
+
+    <select id="selectCount" parameterType="com.entity.CoffeeOrder" resultType="java.lang.Integer">
+        select count(*)
+        from   COFFEE_ORDER
+        where "deleted_flag" =0
+        <if test="finishFlag != 3">
+          AND "finish_flag" = #{finishFlag}
+        </if>
+    </select>
+
+    <select id="selectOrderNo" parameterType="com.entity.CoffeeOrder" resultType="java.lang.String">
+        select "order_no" from COFFEE_ORDER where "deleted_flag"=0 and "finish_flag"=0
+        and rownum &lt;= 1 ORDER BY "order_id" ASC
+    </select>
+
+
+    <update id="FinishOrder" parameterType="com.entity.CoffeeOrder">
+        update COFFEE_ORDER
+        <set>
+            "finish_flag"=1,
+            "updated_time" = sysdate
+        </set>
+        <where>
+            "order_no"=#{orderNo}
+        </where>
+    </update>
 
 
     <!--此处resultType为查询返回字段的类型，并不是list(因为使用了distinct 去重复)-->

@@ -30,4 +30,25 @@ public interface OrderService {
      * @return
      */
     ServerResponse<List<IdsDto>> selectOrderList(CoffeeOrder coffeeOrder);
+
+    /**
+     * 管理端查询订单列表
+     * @param coffeeOrder
+     * @return
+     */
+    ServerResponse<List<CoffeeOrder>> ConsoleOrderList(CoffeeOrder coffeeOrder);
+
+    /**
+     * 查询订单 进行制作
+     * @param coffeeOrder
+     * @return
+     */
+    ServerResponse<List<CoffeeOrder>> ConsoleOrder(CoffeeOrder coffeeOrder);
+
+    /**
+     * 完成订单
+     * @param coffeeOrder
+     * @return
+     */
+    int FinishOrder(CoffeeOrder coffeeOrder);
 }

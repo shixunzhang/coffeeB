@@ -2,6 +2,7 @@ package com.entity;
 
 import lombok.Data;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Data
@@ -23,5 +24,10 @@ public class CoffeeOrder {
     private String goodName;
     private int takeOut;
     private int goodsCategory;
+
+    @Transient
+    private Integer pageNum;
+    @Transient
+    private Integer pageSize;
 
 }

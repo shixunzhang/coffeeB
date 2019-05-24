@@ -3,12 +3,14 @@ package com.service.impl;
 import com.common.ServerResponse;
 import com.dao.AddressDao;
 import com.dao.UserDao;
-import com.entity.CoffeeAddress;
 import com.entity.CoffeeUser;
 import com.entity.PhoneDto;
+import com.github.pagehelper.PageHelper;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service("iUserService")
@@ -17,6 +19,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
 	private AddressDao addressDao;
 
 //	public ServerResponse<User> findUserByPhone(String userId, String password) {
@@ -160,6 +163,32 @@ public class UserServiceImpl implements UserService {
 		}
 		else{
 			return ServerResponse.createBySuccess(userResult);
+		}
+	}
+
+	/**
+	 * 用户列表
+	 * @param coffeeUser
+	 * @return
+	 */
+	@Override
+	public ServerResponse<List<CoffeeUser>> findUserList(CoffeeUser coffeeUser) {
+
+		Integer count = userDao.selectCount(coffeeUser);
+		PageHelper.startPage(coffeeUser.getPageNum(),coffeeUser.getPageSize());
+		List<CoffeeUser> list = userDao.findUserList(coffeeUser);
+		if(list == null){
+			return ServerResponse.createByErrorMessage("查询用户列表为空");
+		}
+		else{
+			for (CoffeeUser coffeeUser1 : list) {
+				if(coffeeUser1.getUserAddress()==-1){
+					coffeeUser1.setAddressString("未设置收货地址");
+				}else{
+					coffeeUser1.setAddressString(addressDao.getAddressById(coffeeUser1.getUserAddress()));
+				}
+			}
+			return ServerResponse.createBySuccess(count.toString(),list);
 		}
 	}
 }

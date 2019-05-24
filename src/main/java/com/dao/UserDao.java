@@ -2,6 +2,8 @@ package com.dao;
 
 import com.entity.CoffeeUser;
 
+import java.util.List;
+
 public interface UserDao {
 
 
@@ -60,4 +62,18 @@ public interface UserDao {
 	 * @return
 	 */
 	int changeAddress(CoffeeUser coffeeUser);
+
+	/**
+	 * 查询总数
+	 * @param coffeeUser
+	 * @return
+	 */
+    Integer selectCount(CoffeeUser coffeeUser);
+
+	/**
+	 * 用户列表
+	 * @param coffeeUser
+	 * @return
+	 */
+	List<CoffeeUser> findUserList(CoffeeUser coffeeUser);
 }

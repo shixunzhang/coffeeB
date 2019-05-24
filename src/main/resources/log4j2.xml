@@ -23,51 +23,47 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <logger name="org.apache.ibatis" additivity="true">
+        <logger name="org.apache.mybatis" additivity="true">
             <level value="DEBUG"/>
-            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="Console"/>
         </logger>
 
         <logger name="org.mybatis.spring" additivity="true">
             <level value="ERROR"/>
-            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="Console"/>
         </logger>
+
         <logger name="java.sql" additivity="true">
             <level value="DEBUG"/>
-            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="Console"/>
         </logger>
 
         <logger name="java.sql.Connection" additivity="true">
             <level value="DEBUG"/>
-            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="Console"/>
         </logger>
 
         <logger name="java.sql.Statement" additivity="true">
             <level value="DEBUG"/>
-            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="Console"/>
         </logger>
 
         <logger name="java.sql.PreparedStatement" additivity="true">
             <level value="DEBUG"/>
-            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="Console"/>
         </logger>
 
         <logger name="java.sql.ResultSet" additivity="true">
             <level value="DEBUG"/>
-            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="Console"/>
         </logger>
 
-        <!-- Spring -->
-        <logger name="org.springframework" additivity="true">
-            <level value="ERROR"/>
-            <appender-ref ref="consoleAppender"/>
-        </logger>
-
-        <!--&lt;!&ndash; ActiveMQ &ndash;&gt;-->
-        <!--<logger name="org.apache.activemq" additivity="true">-->
+        <!--&lt;!&ndash; Spring &ndash;&gt;-->
+        <!--<logger name="org.springframework" additivity="true">-->
             <!--<level value="ERROR"/>-->
-            <!--<appender-ref ref="consoleAppender"/>-->
+            <!--<appender-ref ref="Console"/>-->
         <!--</logger>-->
+
 
         <Root level="debug">
                <!-- 这里是输入到文件-->
